@@ -1,0 +1,1 @@
+INSERT INTO tasks (id, title, description, completed) VALUES (1, 'Levar o lixo pra fora', 'Pegar o saco de lixo da area de servico e levar para a rua', false)
