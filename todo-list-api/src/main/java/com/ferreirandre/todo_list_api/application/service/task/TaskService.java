@@ -1,9 +1,9 @@
-package com.ferreirandre.todo_list_api.application.service;
+package com.ferreirandre.todo_list_api.application.service.task;
 
-import com.ferreirandre.todo_list_api.api.dto.TaskRequest;
-import com.ferreirandre.todo_list_api.api.dto.TaskResponse;
-import com.ferreirandre.todo_list_api.domain.model.Task;
-import com.ferreirandre.todo_list_api.infrastructure.repository.TaskRepository;
+import com.ferreirandre.todo_list_api.api.dto.task.TaskRequest;
+import com.ferreirandre.todo_list_api.api.dto.task.TaskResponse;
+import com.ferreirandre.todo_list_api.domain.model.task.Task;
+import com.ferreirandre.todo_list_api.infrastructure.repository.task.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

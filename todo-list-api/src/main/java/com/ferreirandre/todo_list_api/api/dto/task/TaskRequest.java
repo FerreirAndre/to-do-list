@@ -1,4 +1,4 @@
-package com.ferreirandre.todo_list_api.api.dto;
+package com.ferreirandre.todo_list_api.api.dto.task;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.ferreirandre.todo_list_api.domain.model;
+package com.ferreirandre.todo_list_api.domain.model.task;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,3 +23,4 @@ public class Task {
     @Column(nullable = false)
     private boolean completed = false;
 }
+
