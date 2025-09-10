@@ -1,6 +1,6 @@
 CREATE TABLE tasks (
-        id BIGINT PRIMARY KEY UNIQUE NOT NULL,
-        title VARCHAR(255) unique not null,
+        id BIGSERIAL PRIMARY KEY,
+        title VARCHAR(255) UNIQUE NOT NULL,
         description TEXT,
         completed BOOLEAN NOT NULL
 );

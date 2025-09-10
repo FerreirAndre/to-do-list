@@ -1,8 +1,10 @@
 package com.ferreirandre.todo_list_api.api.controller.authentication;
 
 import com.ferreirandre.todo_list_api.api.dto.authentication.AuthenticationDTO;
+import com.ferreirandre.todo_list_api.api.dto.authentication.LoginResponseDTO;
 import com.ferreirandre.todo_list_api.api.dto.authentication.RegistrationDTO;
 import com.ferreirandre.todo_list_api.domain.model.user.User;
+import com.ferreirandre.todo_list_api.application.service.auth.TokenService;
 import com.ferreirandre.todo_list_api.infrastructure.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +26,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken(((User) auth.getPrincipal()));
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")

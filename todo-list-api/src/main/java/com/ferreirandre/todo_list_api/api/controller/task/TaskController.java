@@ -26,4 +26,9 @@ public class TaskController {
     public ResponseEntity<TaskResponse> create(@RequestBody TaskRequest task) {
         return ResponseEntity.ok(service.create(task));
     }
+
+    @PatchMapping("/{id}/completed")
+    public ResponseEntity<TaskResponse> toggleCompleted(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(service.toggleCompleted(id));
+    }
 }

@@ -1,4 +1,4 @@
-package com.ferreirandre.todo_list_api.application.service.user;
+package com.ferreirandre.todo_list_api.application.service.auth;
 
 import com.ferreirandre.todo_list_api.infrastructure.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
