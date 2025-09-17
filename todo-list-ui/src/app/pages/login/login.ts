@@ -7,6 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { UserInterface } from '../../models/user.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +20,8 @@ import {
 export class Login {
   fb = inject(FormBuilder);
   http = inject(HttpClient);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   form = this.fb.nonNullable.group({
     login: ['', Validators.required],
@@ -25,10 +30,15 @@ export class Login {
 
   onSubmit(): void {
     this.http
-      .post<string>('http://localhost:8080/auth/login', this.form.getRawValue())
-      .subscribe((token) => {
-        console.log('token: ', token);
-        localStorage['token'] = token;
+      .post<{ user: UserInterface }>(
+        'http://localhost:8080/auth/login',
+        this.form.getRawValue()
+      )
+      .subscribe((response) => {
+        console.log('response: ', response.user);
+        localStorage.setItem('token', response.user.token);
+        this.authService.currentUserSig.set(response.user);
+        this.router.navigateByUrl('/');
       });
   }
 }
