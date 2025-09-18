@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from '../models/task';
+import { TaskResponse } from '../models/task.response';
+import { TaskRequest } from '../models/task.request';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -9,16 +10,12 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiURL);
+  getAll(): Observable<TaskResponse[]> {
+    return this.http.get<TaskResponse[]>(this.apiURL);
   }
 
-  create(task: Task): Observable<Task> {
-    return this.http.post<Task>(this.apiURL, task);
-  }
-
-  update(id: number, task: Task): Observable<void> {
-    return this.http.put<void>(`${this.apiURL}/${id}`, task);
+  create(task: TaskRequest): Observable<TaskResponse> {
+    return this.http.post<TaskResponse>(this.apiURL, task);
   }
 
   delete(id: number): Observable<void> {

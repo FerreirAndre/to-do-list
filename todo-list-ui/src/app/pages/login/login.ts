@@ -30,14 +30,14 @@ export class Login {
 
   onSubmit(): void {
     this.http
-      .post<{ user: UserInterface }>(
+      .post<UserInterface>(
         'http://localhost:8080/auth/login',
         this.form.getRawValue()
       )
       .subscribe((response) => {
-        console.log('response: ', response.user);
-        localStorage.setItem('token', response.user.token);
-        this.authService.currentUserSig.set(response.user);
+        console.log('response: ', response);
+        localStorage.setItem('token', response.token);
+        this.authService.currentUserSig.set(response);
         this.router.navigateByUrl('/');
       });
   }
