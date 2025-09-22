@@ -37,6 +37,8 @@ public class TaskService {
 
         task.setCompleted(!task.isCompleted());
 
+        repository.saveAndFlush(task);
+
         return toResponse(task);
     }
 

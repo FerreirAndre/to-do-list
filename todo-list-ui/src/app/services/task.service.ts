@@ -18,6 +18,10 @@ export class TaskService {
     return this.http.post<TaskResponse>(this.apiURL, task);
   }
 
+  toggleCompleted(id: number): Observable<TaskResponse> {
+    return this.http.patch<TaskResponse>(`${this.apiURL}/${id}/completed`, {});
+  }
+
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiURL}/${id}`);
   }

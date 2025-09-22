@@ -21,6 +21,6 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private boolean completed = false;
+    private boolean completed;
 }
 

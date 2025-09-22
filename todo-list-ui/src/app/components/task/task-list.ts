@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TaskRequest } from '../../models/task.request';
+import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-task',
@@ -57,6 +58,30 @@ export class TaskList implements OnInit {
       next: (newTask) => {
         this.tasks.push(newTask);
         this.form.reset();
+      },
+      error: (err) => {
+        this.error = err;
+      },
+    });
+  }
+
+  toggleTask(task: Task): void {
+    this.taskService.toggleCompleted(task.id).subscribe({
+      next: (updated) => {
+        task.completed = updated.completed;
+      },
+      error: (err) => {
+        this.error = err;
+      },
+    });
+  }
+
+  deleteTask(id: number): void {
+    if (!confirm('are you sure?')) return;
+
+    this.taskService.delete(id).subscribe({
+      next: () => {
+        this.tasks = this.tasks.filter((t) => t.id != id);
       },
       error: (err) => {
         this.error = err;

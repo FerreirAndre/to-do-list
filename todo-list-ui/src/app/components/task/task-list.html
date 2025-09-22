@@ -1,23 +1,41 @@
 <main class="container">
-  <H2>Tasks</H2>
-  @if(loading) {
-  <p>Loading Tasks!</p>
-  } @else if(error) {
-  <p>error</p>
+  <h2>Tasks</h2>
+
+  @if (loading) {
+  <p>Loading Tasks...</p>
+  } @else if (error) {
+  <p>Error loading tasks.</p>
   }
+
   <form class="add-task" [formGroup]="form" (ngSubmit)="onSubmit()">
     <input
+      class="small-input"
       placeholder="New task..."
       formControlName="title"
       type="text"
       required
     />
-    <input formControlName="description" placeholder="Description" />
-    <button type="submit">Add</button>
+    <input
+      class="small-input"
+      formControlName="description"
+      placeholder="Description"
+    />
+    <button type="submit" class="contrast outline">Add</button>
   </form>
+
   <ul>
-    @for(task of tasks;track task.id) {
-    <li>Title: {{ task.title }} | Description: {{ task.description }}</li>
+    @for (task of tasks; track task.id) {
+    <li class="task-item">
+      <span [class.completed]="task.completed">
+        {{ task.title }} | {{ task.description }}
+      </span>
+      <button type="button" class="secondary small" (click)="toggleTask(task)">
+        {{ task.completed ? "Mark Incomplete" : "Mark Complete" }}
+      </button>
+      <button type="button" class="danger" (click)="deleteTask(task.id)">
+        Delete
+      </button>
+    </li>
     }
   </ul>
 </main>

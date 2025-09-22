@@ -18,13 +18,19 @@ public class TaskController {
     private final TaskService service;
 
     @GetMapping
-    public ResponseEntity<List<TaskResponse>> findAll(){
+    public ResponseEntity<List<TaskResponse>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @PostMapping
     public ResponseEntity<TaskResponse> create(@RequestBody TaskRequest task) {
         return ResponseEntity.ok(service.create(task));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/completed")
